@@ -1,10 +1,14 @@
 import { useState, useEffect} from "react";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Header from "./components/Header"
+import Footer from "./components/Footer";
 import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
+import About from "./components/About";
+//import { useLocation } from "react-router-dom";
 
 function App() {
-  const [isAddTaskVisible, setIsAddTaskVisible] = useState(false);
+  const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([])
 
   useEffect(() => {
@@ -33,7 +37,7 @@ function App() {
   } 
   // Toggle the displaying of our AddTask form
   const handleToggleAddTask = () => {
-    setIsAddTaskVisible(!isAddTaskVisible);
+    setShowAddTask(!showAddTask);
   }
 
   // AddTask
@@ -113,19 +117,33 @@ function App() {
       task
     ));
   }
+  //const location = useLocation();
+  const location = null;
   return (
-    <div className="container">
-      <Header onToggleAddTask={handleToggleAddTask} isAddTaskVisible={isAddTaskVisible} />
-      { isAddTaskVisible && <AddTask onAdd={handleAddTask}/> } 
-      { tasks.length === 0 ?
-        "No Tasks Right Now" :        
-        <Tasks 
-          tasks={tasks} 
-          onDeleteTask={handleDeleteTask}
-          onToggleReminder={handleToggleReminder}
-        />
-      }
-    </div>
+    <Router>
+      <div className="container">
+        <Header onToggleAddTask={handleToggleAddTask} showAddTask={showAddTask} location={location}/>
+        <Routes>
+          <Route path="/" exact element={
+            <>
+              { showAddTask && <AddTask onAdd={handleAddTask}/> } 
+              { tasks.length === 0 ?
+                "No Tasks Right Now" :        
+                <Tasks 
+                  tasks={tasks} 
+                  onDeleteTask={handleDeleteTask}
+                  onToggleReminder={handleToggleReminder}
+                />
+              }
+            </>
+          } />
+          <Route path="/about" element={<About />} />
+        </Routes>
+        { //location.pathname === "/" && (<Footer />)
+          <Footer />
+        }
+      </div>
+    </Router>
   );
 }
 

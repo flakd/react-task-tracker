@@ -4,31 +4,13 @@
       "id": 1,
       "text": "Doctors Appointment",
       "day": "Feb 5th at 2:30pm",
-      "reminder": false
+      "reminder": true
     },
     {
       "id": 2,
       "text": "Meeting at School",
       "day": "Feb 6th at 1:30pm",
-      "reminder": true
-    },
-    {
-      "text": "dfdfd",
-      "day": "dfdfd",
-      "reminder": false,
-      "id": 3
-    },
-    {
-      "text": "fggffgf",
-      "day": "",
-      "reminder": true,
-      "id": 4
-    },
-    {
-      "text": "fgfgsdfgfgf",
-      "day": "",
-      "reminder": false,
-      "id": 5
+      "reminder": false
     }
   ]
 }
